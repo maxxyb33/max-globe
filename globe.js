@@ -25,10 +25,10 @@ DAT.Globe = function(container, colorFn) {
   var vector, mesh, atmosphere, point;
 
   var pointGeo, pointModel, gridGeo, gridModel;
-  var gridDensity = 7; // 0-10
+  var gridDensity = 5; // 0-10 orig 7
   var pointType = 'hex'; // cube || hex || sphere
-  var pointScale = 1.1;
-  var pointExtrudeRange = [0.01,120];
+  var pointScale = 2.1; // orig  1.1
+  var pointExtrudeRange = [0.05, 200];
 
   gridModel = 'models/gridLand'+gridDensity+'.js';
   if (pointType == 'cube') pointModel = "models/cube.js";
@@ -53,17 +53,17 @@ DAT.Globe = function(container, colorFn) {
   function modelLoader() {
     loader = new THREE.JSONLoader();
     loader.load({ model:pointModel, callback: function(g) {
-      pointGeo = g;
-      gridLoader()
-    }});
+        pointGeo = g;
+        gridLoader()
+      }});
   }
   function gridLoader() {
     loader = new THREE.JSONLoader();
     loader.load({ model: gridModel, callback: function(g) {
-      gridGeo = g;
-      init();
-      createPoints();
-    }});
+        gridGeo = g;
+        init();
+        createPoints();
+      }});
   }
 
   function init() {
@@ -93,11 +93,11 @@ DAT.Globe = function(container, colorFn) {
 
     material = new THREE.MeshShaderMaterial({
 
-          uniforms: uniforms,
-          vertexShader: shader.vertexShader,
-          fragmentShader: shader.fragmentShader
+      uniforms: uniforms,
+      vertexShader: shader.vertexShader,
+      fragmentShader: shader.fragmentShader
 
-        });
+    });
 
     mesh = new THREE.Mesh(geometry, material);
     mesh.matrixAutoUpdate = false;
@@ -108,11 +108,11 @@ DAT.Globe = function(container, colorFn) {
 
     material = new THREE.MeshShaderMaterial({
 
-          uniforms: uniforms,
-          vertexShader: shader.vertexShader,
-          fragmentShader: shader.fragmentShader
+      uniforms: uniforms,
+      vertexShader: shader.vertexShader,
+      fragmentShader: shader.fragmentShader
 
-        });
+    });
 
     mesh = new THREE.Mesh(geometry, material);
     mesh.scale.x = mesh.scale.y = mesh.scale.z = 1.1;
@@ -162,12 +162,12 @@ DAT.Globe = function(container, colorFn) {
       var z = gridGeo.vertices[i].position.z;
 
 
-     var r;
-     var theta;
-     var phi;
-       theta = Math.acos(y/200)/Math.PI;
-       phi = ((Math.atan2(z,-x))+Math.PI)/(Math.PI*2);
-        addPoint(x,y,z,phi,theta, subgeo);
+      var r;
+      var theta;
+      var phi;
+      theta = Math.acos(y/200)/Math.PI;
+      phi = ((Math.atan2(z,-x))+Math.PI)/(Math.PI*2);
+      addPoint(x,y,z,phi,theta, subgeo);
     }
 
     if (pointType == ('sphere')){
@@ -188,13 +188,13 @@ DAT.Globe = function(container, colorFn) {
 
     this.material = new THREE.MeshShaderMaterial({
 
-          uniforms: this.uniforms,
-          vertexShader: this.shader.vertexShader,
-          fragmentShader: this.shader.fragmentShader,
-          color: 0xffffff,
-          vertexColors: THREE.FaceColors
+      uniforms: this.uniforms,
+      vertexShader: this.shader.vertexShader,
+      fragmentShader: this.shader.fragmentShader,
+      color: 0xffffff,
+      vertexColors: THREE.FaceColors
 
-        });
+    });
 
     this.points = new THREE.Mesh(this._baseGeometry, this.material);
     this.points.doubleSided = false;
@@ -227,7 +227,7 @@ DAT.Globe = function(container, colorFn) {
     for (i = 0; i < point.geometry.faceVertexUvs[0].length; i++) {
 
       for (j = 0; j < point.geometry.faceVertexUvs[0][i].length; j++) {
-         point.geometry.faceVertexUvs[0][i][j] = new THREE.UV( u,v );
+        point.geometry.faceVertexUvs[0][i][j] = new THREE.UV( u,v );
       }
 
     }
@@ -342,4 +342,3 @@ DAT.Globe = function(container, colorFn) {
   return this;
 
 };
-
