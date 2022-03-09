@@ -51,18 +51,18 @@
       }
 
       .bull {
-        padding: 0 5px;
-        color: #555;
+        padding: 0 6px;
+        color: #b20202;
       }
 
       #title {
         position: absolute;
-        top: 20px;
+        top: 10px;
         width: 270px;
         left: 20px;
-        background-color: rgba(0,0,0,0.2);
+        background-color: rgba(19, 8, 8, 0.59);
         border-radius: 3px;
-        font: 20px Georgia;
+        font: 25px Georgia;
         padding: 20px;
       }
 
@@ -73,7 +73,7 @@
         text-align: center;
         float: left;
         width: 90px;
-        color: rgba(255, 255, 255, 0.4);
+        color: rgb(212, 32, 32);
 
         cursor: pointer;
         -webkit-transition: all 0.1s ease-out;
@@ -110,7 +110,7 @@
   </div>
 
   <div id="currentInfo">
-    <span id="year1990" class="year">By Duration</span>
+    <span id="year1990" class="year">Height By Duration</span>
     <span id="year1995" class="year"></span>
     <span id="year2000" class="year">1989 to Present</span>
   </div>
@@ -161,6 +161,7 @@
         var y = document.getElementById('year'+years[i]);
         y.addEventListener('mouseover', settime(globe,i), false);
       }
+
 
       var xhr;
       TWEEN.start();
